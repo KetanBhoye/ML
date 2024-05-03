@@ -1,0 +1,41 @@
+# 7.	Perform standardization and normalization of the numerical features and analyze the transformation visually using suitable visualization.
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+import pandas as pd
+
+# Assuming 'df' is my DataFrame containing numerical attributes
+numeric_columns = df1.select_dtypes(include='number')
+
+# Standardization
+scaler_standard = StandardScaler()
+standardized_data = scaler_standard.fit_transform(numeric_columns)
+ 
+# Normalization
+scaler_minmax = MinMaxScaler()
+normalized_data = scaler_minmax.fit_transform(numeric_columns)
+
+# Create subplots for visualization
+fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+fig.suptitle('Visual Analysis of Standardization and Normalization')
+
+# Original Data
+sns.histplot(data=numeric_columns, kde=True, ax=axes[0, 0])
+axes[0, 0].set_title('Original Data')
+
+# Standardized Data
+sns.histplot(data=pd.DataFrame(standardized_data, columns=numeric_columns.columns), kde=True, ax=axes[0, 1])
+axes[0, 1].set_title('Standardized Data')
+
+# Normalized Data
+sns.histplot(data=pd.DataFrame(normalized_data, columns=numeric_columns.columns), kde=True, ax=axes[1, 0])
+axes[1, 0].set_title('Normalized Data')
+
+# Boxplot for Original and Standardized Data (to highlight outliers)
+sns.boxplot(data=pd.concat([numeric_columns, pd.DataFrame(standardized_data, columns=numeric_columns.columns)], axis=1), ax=axes[1, 1])
+axes[1, 1].set_title('Boxplot - Original vs Standardized Data')
+
+plt.tight_layout(rect=[0, 0, 1, 0.96])
+plt.show()
+

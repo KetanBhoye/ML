@@ -1,0 +1,15 @@
+# Task 5: Model Evaluation
+# Evaluate the Decision Tree classifier on the testing data
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+y_pred_decision_tree = decision_tree.predict(X_test)
+accuracy_decision_tree = accuracy_score(y_test, y_pred_decision_tree)
+precision_decision_tree = precision_score(y_test, y_pred_decision_tree, average='macro')
+recall_decision_tree = recall_score(y_test, y_pred_decision_tree, average='macro')
+f1_score_decision_tree = f1_score(y_test, y_pred_decision_tree, average='macro')
+
+print("Decision Tree Classifier Metrics:")
+print("Accuracy:", accuracy_decision_tree)
+print("Precision:", precision_decision_tree)
+print("Recall:", recall_decision_tree)
+print("F1 Score:", f1_score_decision_tree)
